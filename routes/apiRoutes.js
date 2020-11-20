@@ -1,6 +1,6 @@
 // Load Data
 var fs = require("fs");
-var notesDatabase = require("..db/db.json");
+var notesDatabase = require("../Develop/db/db.json");
 
 // Routing
 module.exports = function(app){
