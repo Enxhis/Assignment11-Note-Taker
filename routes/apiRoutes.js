@@ -2,13 +2,13 @@
 var fs = require("fs");
 var db = require("../Develop/db/db.json");
 // Generate a v4 (random) id
-var uuidv4 = require("uuid");
+const { v4: uuidv4 } = require('uuid');
 
 // Routing
 module.exports = function(app){
     // API GET request to retrieve data from database
     app.get("/api/notes", function(req, res){
-        res.send(db);
+        res.json(db);
     });
 
     // API POST to create new notes
@@ -19,7 +19,7 @@ module.exports = function(app){
             text: req.body.text
         };
         db.push(newNote);
-        res.send(newNote);
+        res.json(newNote);
     });
 
     // API DELETE to delete notes
@@ -31,6 +31,6 @@ module.exports = function(app){
                 var deletedNote = db.slice(index, 1);
             }
         }
-        res.send(deletedNote);
-    })
+        res.json(deletedNote);
+    });
 }
