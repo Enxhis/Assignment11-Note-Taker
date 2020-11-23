@@ -1,6 +1,6 @@
 // Load Data
 var fs = require("fs");
-var db = require("../Develop/db/db.json");
+var db = require("../db/db.json");
 // Generate a v4 (random) id
 const { v4: uuidv4 } = require('uuid');
 
@@ -8,21 +8,19 @@ const { v4: uuidv4 } = require('uuid');
 module.exports = function(app){
     // API GET request to retrieve data from database
     app.get("/api/notes", function(req, res){
-        res.json(db);
+        res.send(db);
     });
 
     // API POST to create new notes
     app.post("/api/notes", function(req, res){
-        // use of UUID
-        req.body.id = uuidv4();
-        var newNote = req.body;
+        var newNote = {
+            id: uuidv4(),
+            title: req.body.title,
+            text: req.body.text
+
+        };
         db.push(newNote);
-        // write db JSON file
-        fs.writeFile("../Develop/db/db.json", JSON.stringify(db), function(err){
-            if (err) throw err;
-            // send response
-            res.json(db);
-        })
+        res.send(newNote);
     });
 
     // API DELETE to delete notes
@@ -30,16 +28,10 @@ module.exports = function(app){
         var notesID = req.params.id;
         for(var i = 0; i < db.length; i++){
             if(db[i].id === notesID){
-                db.slice(i, 1);
+                var index = db.indexOf(db);
+                db.slice(index, 1);
             }
+            res.send(db);
         }
-        // writing new db
-        fs.writeFile("../Develop/db/db.json", JSON.stringify(db), function(err){
-            if (err) throw err;
-            res.json(db);
-        });
     });
-    app.get("/api/notes", function(req, res) {
-        return res.sendFile(path.json(__dirname, "../Develop/db/db.json"));
-      });
 }
