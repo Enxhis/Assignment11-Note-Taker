@@ -13,13 +13,16 @@ module.exports = function(app){
 
     // API POST to create new notes
     app.post("/api/notes", function(req, res){
-        var newNote = {
-            id: uuidv4(),
-            title : req.body.title,
-            text: req.body.text
-        };
+        // use of UUID
+        req.body.id = uuidv4();
+        var newNote = req.body;
         db.push(newNote);
-        res.json(newNote);
+        // write db JSON file
+        fs.writeFile("../Develop/db/db.json", JSON.stringify(db), function(err){
+            if (err) throw err;
+            // send response
+            res.json(db);
+        })
     });
 
     // API DELETE to delete notes
@@ -27,10 +30,16 @@ module.exports = function(app){
         var notesID = req.params.id;
         for(var i = 0; i < db.length; i++){
             if(db[i].id === notesID){
-                var index = db.indexOf(db);
-                var deletedNote = db.slice(index, 1);
+                db.slice(i, 1);
             }
         }
-        res.json(deletedNote);
+        // writing new db
+        fs.writeFile("../Develop/db/db.json", JSON.stringify(db), function(err){
+            if (err) throw err;
+            res.json(db);
+        });
     });
+    app.get("/api/notes", function(req, res) {
+        return res.sendFile(path.json(__dirname, "../Develop/db/db.json"));
+      });
 }
