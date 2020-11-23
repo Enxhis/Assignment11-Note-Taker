@@ -19,16 +19,18 @@ module.exports = function (app) {
             text: req.body.text
 
         };
+        // push newNote to database
         db.push(newNote);
         res.send(newNote);
     });
 
     // API DELETE to delete notes
     app.delete("/api/notes/:id", function (req, res) {
-
+        // id variable
         var noteID = req.params.id
 
         for (var i = 0; i < db.length; i++) {
+            // check that the noteId matches the id in the database
             if (db[i].id === noteID) {
                 let index = db.indexOf(db);
                 db.splice(index, 1);
