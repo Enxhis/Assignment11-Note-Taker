@@ -2,7 +2,7 @@
 
 ## Description
 
-   * Application that can be used to write, save and delete notes. This application uses an express backend. It saves and retrieves data from a JSON file.
+   * An application that can be used to write, save and delete notes. This application uses an express backend. It saves and retrieves data from a JSON file.
 
 ## Table of Content
 
@@ -39,8 +39,8 @@
 ![Note-taker](/public/assets/Images/Note-Taker-2.png)
 
 ## Links
-  * https://guarded-journey-38495.herokuapp.com/
-  
+  * Heroku deployed application link: https://guarded-journey-38495.herokuapp.com/
+  * GitHub repository link:
 ## Contribution
    * Enxhi Salaj
 
