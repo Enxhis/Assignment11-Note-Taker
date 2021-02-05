@@ -40,7 +40,7 @@
 
 ## Links
   * Heroku deployed application link: https://guarded-journey-38495.herokuapp.com/
-  * GitHub repository link:
+  * GitHub repository link: https://github.com/Enxhis/Assignment11-Note-Taker
 ## Contribution
    * Enxhi Salaj
 
